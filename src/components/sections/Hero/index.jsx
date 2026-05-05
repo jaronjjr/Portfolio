@@ -1,122 +1,82 @@
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
-import { SiStackoverflow } from 'react-icons/si'
-import { socialLinks } from '../../../data/socialLinks'
-
-const iconMap = {
-  GitHub: FiGithub,
-  LinkedIn: FiLinkedin,
-  'Stack Overflow': SiStackoverflow,
-  Email: FiMail,
-}
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 md:pt-20 py-24">
-      <div className="relative z-[1] max-w-[1100px] mx-auto px-6">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-end pb-16 sm:pb-24 pt-32 px-6 sm:px-10 lg:px-16">
+      <div className="relative z-[1] max-w-[1400px] mx-auto w-full">
+        {/* Label */}
         <motion.p
-          className="font-mono text-sm sm:text-base text-accent-light mb-5"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          className="font-mono text-[0.65rem] text-text-muted uppercase tracking-[0.2em] mb-8 sm:mb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
         >
-          Hi, my name is
+          Portfolio / ©2026
         </motion.p>
 
+        {/* Main statement */}
         <motion.h1
-          className="gradient-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-2"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-[clamp(1.8rem,5.5vw,5rem)] font-bold leading-[1.08] tracking-[-0.02em] uppercase text-text-primary max-w-[1000px]"
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
         >
-          Jaron Jose Raj Joseph.
+          Senior software engineer building{' '}
+          <span className="text-accent">scalable back-end</span>{' '}
+          systems & cloud-native digital solutions.
         </motion.h1>
 
+        {/* Tech ticker */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
+          className="mt-8 sm:mt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
         >
           <TypeAnimation
             sequence={[
-              'I build scalable back-end systems.',
-              2000,
-              'I architect cloud-native APIs.',
-              2000,
-              'I lead engineering teams.',
-              2000,
-              'I craft robust Node.js services.',
-              2000,
+              'Node.js · AWS · PostgreSQL · Oracle',
+              3000,
+              'Express.js · Docker · Redis · Jenkins',
+              3000,
+              'Spring Boot · Socket.IO · Elasticsearch',
+              3000,
             ]}
-            wrapper="h2"
-            speed={50}
+            wrapper="p"
+            speed={40}
             repeat={Infinity}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-secondary leading-tight mb-6 min-h-[1.3em]"
+            className="font-mono text-[0.7rem] sm:text-xs text-text-muted tracking-wider uppercase"
           />
         </motion.div>
 
-        <motion.p
-          className="max-w-[540px] text-text-secondary text-base sm:text-lg leading-relaxed mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
-          Senior Software Engineer with 5.5+ years of experience specializing in
-          Node.js, AWS, and distributed systems. Based in Kerala, India.
-        </motion.p>
-
+        {/* CTA row */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10 mt-10 sm:mt-14"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.5 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
         >
           <a
             href="#projects"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-[0.95rem] font-semibold bg-accent text-white shadow-[0_4px_20px_var(--color-accent-glow)] transition-all duration-300 no-underline hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-[0_8px_30px_var(--color-accent-glow)] hover:text-white"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-text-primary text-bg-primary text-[0.7rem] sm:text-xs font-semibold uppercase tracking-[0.15em] no-underline transition-all duration-300 hover:bg-accent hover:text-bg-primary"
           >
             View My Work
           </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-[0.95rem] font-semibold border border-accent-light text-accent-light bg-transparent transition-all duration-300 no-underline hover:bg-accent-light/10 hover:-translate-y-0.5 hover:text-accent-light"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
-
-        <motion.div
-          className="flex gap-4 sm:gap-5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-        >
-          {socialLinks.map((s) => {
-            const Icon = iconMap[s.label]
-            return (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith('mailto') ? undefined : '_blank'}
-                rel={s.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                aria-label={s.label}
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-border-subtle text-text-muted text-xl transition-all duration-300 no-underline hover:text-accent-light hover:border-accent-light hover:-translate-y-1 hover:shadow-[0_4px_12px_var(--color-accent-glow)]"
-              >
-                <Icon />
-              </a>
-            )
-          })}
+          <span className="text-text-muted text-[0.65rem] uppercase tracking-[0.2em] hidden sm:inline">
+            Scroll Down
+          </span>
         </motion.div>
       </div>
 
+      {/* Scroll line */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.5 }}
+        transition={{ delay: 1.8, duration: 0.5 }}
       >
-        <div className="w-px h-[60px] bg-gradient-to-b from-accent-light to-transparent animate-scroll-pulse" />
+        <div className="w-px h-12 bg-gradient-to-b from-text-muted/50 to-transparent animate-scroll-pulse" />
       </motion.div>
     </section>
   )

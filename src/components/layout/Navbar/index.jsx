@@ -6,7 +6,7 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Work', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -22,34 +22,27 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-bg-primary/85 backdrop-blur-xl border-b border-border-subtle py-3'
-          : 'py-4'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? 'bg-bg-primary/95 backdrop-blur-md border-b border-border-subtle' : ''
       }`}
       initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.5 }}
     >
-      <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between">
-        <a href="#hero" className="font-mono text-xl font-semibold text-text-primary no-underline hover:text-text-primary">
-          <span className="text-accent-light">&lt;</span>
-          JJ
-          <span className="text-accent-light"> /&gt;</span>
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-5 flex items-center justify-between">
+        <a href="#hero" className="text-text-primary font-bold text-base tracking-tight no-underline uppercase">
+          Jaron<span className="text-accent">.</span>
         </a>
 
         <ul className="hidden md:flex list-none gap-8">
           {navLinks.map((link, i) => (
             <motion.li
               key={link.href}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * i, duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.05 * i, duration: 0.4 }}
             >
-              <a
-                href={link.href}
-                className="relative text-text-secondary text-sm font-medium transition-colors duration-200 no-underline hover:text-accent-light after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-accent-light after:transition-all after:duration-300 hover:after:w-full"
-              >
+              <a href={link.href} className="text-text-muted text-[0.7rem] uppercase tracking-[0.15em] font-medium no-underline transition-colors duration-300 hover:text-text-primary">
                 {link.label}
               </a>
             </motion.li>
@@ -60,13 +53,13 @@ export default function Navbar() {
           href="/Jaron-Jose-Raj-Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-block text-sm font-medium px-5 py-2 border border-accent-light rounded-md text-accent-light no-underline transition-all duration-300 hover:bg-accent-light/10 hover:text-accent-light"
+          className="hidden md:inline-block text-[0.7rem] uppercase tracking-[0.15em] font-medium px-5 py-2 border border-border-subtle rounded-full text-text-muted no-underline transition-all duration-300 hover:border-text-primary hover:text-text-primary"
         >
           Resume
         </a>
 
         <button
-          className="md:hidden bg-transparent border-none text-text-primary text-2xl cursor-pointer"
+          className="md:hidden bg-transparent border-none text-text-primary text-xl cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
@@ -77,7 +70,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="flex md:hidden flex-col items-center gap-5 py-6 bg-bg-primary/95 backdrop-blur-xl border-b border-border-subtle overflow-hidden"
+            className="md:hidden flex flex-col items-center gap-6 py-10 bg-bg-primary border-b border-border-subtle"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -87,20 +80,12 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-text-secondary text-base font-medium no-underline hover:text-accent-light"
+                className="text-text-secondary text-sm uppercase tracking-[0.15em] no-underline hover:text-text-primary"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="/Jaron-Jose-Raj-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2 border border-accent-light rounded-md text-accent-light no-underline"
-            >
-              Resume
-            </a>
           </motion.div>
         )}
       </AnimatePresence>

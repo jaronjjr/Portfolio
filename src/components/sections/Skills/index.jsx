@@ -7,44 +7,52 @@ export default function Skills() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="skills" className="relative py-20 sm:py-24 lg:py-28" ref={ref}>
-      <div className="max-w-[1100px] mx-auto px-6">
-        <SectionTitle number="02" inView={inView}>Skills & Technologies</SectionTitle>
+    <section id="skills" className="relative py-24 sm:py-32 lg:py-40 px-6 sm:px-10 lg:px-16" ref={ref}>
+      <div className="max-w-[1400px] mx-auto">
+        <SectionTitle number="02" inView={inView}>Skills</SectionTitle>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
+        <motion.p
+          className="text-text-secondary text-sm sm:text-base max-w-[550px] mb-14 sm:mb-20"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          Sharp engineering, smart architecture, and a deep commitment to clean, maintainable code.
+        </motion.p>
+
+        <div>
           {skillCategories.map((cat, ci) => (
             <motion.div
               key={cat.title}
-              className="bg-bg-card border border-border-subtle rounded-2xl p-5 sm:p-7 backdrop-blur-sm"
-              initial={{ opacity: 0, y: 30 }}
+              className="border-t border-border-subtle py-7 sm:py-9 grid grid-cols-1 sm:grid-cols-[180px_1fr] lg:grid-cols-[220px_1fr] gap-3 sm:gap-8 items-start"
+              initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 * ci, duration: 0.5 }}
+              transition={{ delay: 0.1 * ci + 0.2, duration: 0.4 }}
             >
-              <h3 className="text-xs sm:text-sm font-semibold text-accent-light uppercase tracking-widest mb-5">
-                {cat.title}
-              </h3>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-[0.6rem] text-accent tracking-wider">/00{ci + 1}</span>
+                <h3 className="text-xs sm:text-sm font-semibold text-text-primary uppercase tracking-wide">
+                  {cat.title}
+                </h3>
+              </div>
+
               <div className="flex flex-wrap gap-2.5">
-                {cat.skills.map((skill, si) => {
+                {cat.skills.map((skill) => {
                   const Icon = skill.icon
                   return (
-                    <motion.div
+                    <span
                       key={skill.name}
-                      className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 bg-accent/[0.06] border border-accent/[0.12] rounded-lg text-xs sm:text-sm font-medium text-text-secondary cursor-default transition-all duration-300 hover:bg-accent/[0.12] hover:border-accent/30 hover:text-text-primary"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 0.15 * ci + 0.05 * si, duration: 0.3 }}
-                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-border-subtle text-xs sm:text-sm text-text-secondary transition-all duration-300 hover:border-accent/40 hover:text-text-primary"
                     >
-                      <span className="text-base sm:text-lg text-accent-light flex items-center">
-                        <Icon />
-                      </span>
-                      <span>{skill.name}</span>
-                    </motion.div>
+                      <Icon className="text-accent text-sm" />
+                      {skill.name}
+                    </span>
                   )
                 })}
               </div>
             </motion.div>
           ))}
+          <div className="border-t border-border-subtle" />
         </div>
       </div>
     </section>
